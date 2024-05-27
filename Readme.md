@@ -30,7 +30,7 @@ Add section inside configuration file <br />
   "Service": {
     "Url": "https://some-url-goes-here.com",
     "Key": "e324a183-54df-4f24-9db8-66322d066214",
-    "RequestsPerSecond": 5
+    "RequestsPerHour": 5
   }
 }
 ```

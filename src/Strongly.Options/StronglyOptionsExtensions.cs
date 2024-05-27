@@ -15,7 +15,7 @@ public static class StronglyOptionsExtensions
         IConfiguration configuration,
         Assembly? assembly = null)
     {
-        assembly ??= Assembly.GetExecutingAssembly();
+        assembly ??= Assembly.GetCallingAssembly();
         var configureMethod = GetConfigureOptionsMethod();
 
         foreach (var (type, sectionName) in ScanStronglyConfigurationTypes(assembly))
