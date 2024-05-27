@@ -7,7 +7,8 @@ Strongly.Options is a library that helps you to create strongly-typed options in
 
 Register services
 ```csharp
-builder.Services.AddStronglyOptions();
+var configuration = builder.Configuration;
+builder.Services.AddStronglyOptions(configuration);
 ```
 
 Define C# `class` or `record`
