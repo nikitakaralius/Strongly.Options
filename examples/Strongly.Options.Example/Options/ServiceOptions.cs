@@ -6,7 +6,7 @@ public sealed record ServiceOptions
 {
     public required string Url { get; init; }
 
-    public required string Key { get; init; }
+    public required Guid Key { get; init; }
 
     public required int RequestsPerHour { get; init; }
 }

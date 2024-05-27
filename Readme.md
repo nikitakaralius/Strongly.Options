@@ -18,7 +18,7 @@ public sealed record ServiceOptions
 {
     public string Url { get; init; }
 
-    public string Key { get; init; }
+    public Guid Key { get; init; }
     
     public int RequestsPerHour { get; init; }
 }
