@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options", "src\Str
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.Tests", "tests\Strongly.Options.Tests\Strongly.Options.Tests.csproj", "{63028AF5-D7CA-465B-92C0-8CE78375024A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{1E4EEDDF-2470-4D43-93FD-B530AFDB0676}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
