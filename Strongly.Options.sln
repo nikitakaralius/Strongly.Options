@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DE58DB8D-15A8-44EC-8C80-E76CD1FBEB8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FC078CCE-79BD-4082-B4D2-CF86D81CFEFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options", "src\Strongly.Options\Strongly.Options.csproj", "{DC4A0273-920E-4685-A1D3-80767F912B42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.Tests", "tests\Strongly.Options.Tests\Strongly.Options.Tests.csproj", "{63028AF5-D7CA-465B-92C0-8CE78375024A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC4A0273-920E-4685-A1D3-80767F912B42} = {DE58DB8D-15A8-44EC-8C80-E76CD1FBEB8D}
+		{63028AF5-D7CA-465B-92C0-8CE78375024A} = {FC078CCE-79BD-4082-B4D2-CF86D81CFEFB}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC4A0273-920E-4685-A1D3-80767F912B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC4A0273-920E-4685-A1D3-80767F912B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC4A0273-920E-4685-A1D3-80767F912B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC4A0273-920E-4685-A1D3-80767F912B42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63028AF5-D7CA-465B-92C0-8CE78375024A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63028AF5-D7CA-465B-92C0-8CE78375024A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63028AF5-D7CA-465B-92C0-8CE78375024A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63028AF5-D7CA-465B-92C0-8CE78375024A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
