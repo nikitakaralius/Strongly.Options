@@ -23,8 +23,7 @@ public sealed record ServiceOptions
     public int RequestsPerHour { get; init; }
 }
 ```
-Add section inside configuration file <br />
-`appsettings.json`
+Add section inside configuration (e.g., `appsettings.json`)
 ```json
 {
   "Service": {
