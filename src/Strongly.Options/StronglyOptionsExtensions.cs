@@ -10,6 +10,11 @@ public static class StronglyOptionsExtensions
         IServiceCollection services,
         IConfiguration configuration);
 
+    public static IServiceCollection AddStronglyOptionsFromAssemblyContainingType<T>(
+        this IServiceCollection services,
+        IConfiguration configuration) =>
+        services.AddStronglyOptions(configuration, typeof(T).Assembly);
+
     public static IServiceCollection AddStronglyOptions(
         this IServiceCollection services,
         IConfiguration configuration,
@@ -18,7 +23,7 @@ public static class StronglyOptionsExtensions
         assembly ??= Assembly.GetCallingAssembly();
         var configureMethod = GetConfigureOptionsMethod();
 
-        foreach (var (type, sectionName) in ScanStronglyConfigurationTypes(assembly))
+        foreach (var (type, sectionName) in ScanStronglyOptionTypes(assembly))
         {
             var section = GetConfigurationSection(sectionName, configuration);
             var configure = BuildGenericConfigureMethod(type, configureMethod);
@@ -37,7 +42,7 @@ public static class StronglyOptionsExtensions
            .GetMethod(configureMethodName, methodParameterTypes)!;
     }
 
-    private static IEnumerable<(Type, string Section)> ScanStronglyConfigurationTypes(Assembly assembly) =>
+    private static IEnumerable<(Type, string Section)> ScanStronglyOptionTypes(Assembly assembly) =>
         assembly
            .GetTypes()
            .Select(t => (t, t.GetCustomAttribute<StronglyOptionsAttribute>()?.Section))
