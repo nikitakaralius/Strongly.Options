@@ -73,14 +73,19 @@ public static class StronglyOptionsExtensions
            .Where(t => t.Section is not null)!;
 
     private static IConfiguration GetConfigurationSection(
-        string section,
+        string sectionName,
         IConfiguration configuration)
     {
-        if (section == StronglyOptionsSection.Root)
+        if (sectionName == StronglyOptionsSection.Root)
             return configuration;
 
-        return configuration.GetSection(section)
-            ?? throw new SectionNotFoundException($"Unable to find {section} section inside appsettings.json");
+        var section = configuration.GetSection(sectionName);
+
+        if (section.Value is null)
+            throw new SectionNotFoundException(
+                $"Unable to find {section} section in Configuration");
+
+        return section;
     }
 
     private static Configure BuildGenericConfigureMethod(
