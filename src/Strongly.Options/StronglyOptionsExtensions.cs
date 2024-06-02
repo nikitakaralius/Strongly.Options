@@ -81,7 +81,7 @@ public static class StronglyOptionsExtensions
 
         var section = configuration.GetSection(sectionName);
 
-        if (section.Value is null)
+        if (!section.AsEnumerable().Any(x => x.Value is not null))
             throw new SectionNotFoundException(
                 $"Unable to find {section} section in Configuration");
 

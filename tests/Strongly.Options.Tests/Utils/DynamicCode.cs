@@ -7,6 +7,13 @@ namespace Strongly.Options.Tests.Utils;
 
 internal sealed class DynamicCode
 {
+    private static readonly IReadOnlyList<PortableExecutableReference> References = AppDomain
+       .CurrentDomain
+       .GetAssemblies()
+       .Where(a => !a.IsDynamic)
+       .Select(a => MetadataReference.CreateFromFile(a.Location))
+       .ToList();
+
     private readonly string _code;
 
     private DynamicCode(string code)
@@ -22,16 +29,10 @@ internal sealed class DynamicCode
 
         var syntaxTree = CSharpSyntaxTree.ParseText(_code);
 
-        var references = AppDomain.CurrentDomain
-           .GetAssemblies()
-           .Where(a => !a.IsDynamic)
-           .Select(a => MetadataReference.CreateFromFile(a.Location))
-           .ToList();
-
         var compilation = CSharpCompilation.Create(
             assemblyName,
             syntaxTrees: [syntaxTree],
-            references: references,
+            references: References,
             options: new(OutputKind.DynamicallyLinkedLibrary));
 
         using var peStream = new MemoryStream();
