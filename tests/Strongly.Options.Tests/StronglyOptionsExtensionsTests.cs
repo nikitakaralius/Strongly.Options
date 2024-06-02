@@ -9,7 +9,7 @@ public class StronglyOptionsExtensionsTests
     public void Should_throw_when_section_not_found()
     {
         // Arrange
-        const string code =
+        DynamicCode code =
             """
             using Strongly.Options;
 
@@ -21,7 +21,7 @@ public class StronglyOptionsExtensionsTests
 
             """;
 
-        const string jsonSettings =
+        JsonConfiguration configuration =
             """
             {
               "Auth": {
@@ -34,15 +34,9 @@ public class StronglyOptionsExtensionsTests
             }
             """;
 
-        var assembly = DynamicAssemblyLoader.CreateFromCode(
-            code,
-            "Should_throw_when_section_not_found");
-
-        var configuration = ConfigurationFactory.CreateFromJson(jsonSettings);
-
         // Act
         var act = () => new ServiceCollection()
-           .AddStronglyOptions(configuration, assembly);
+           .AddStronglyOptions(configuration, code.EmitAssembly());
 
         // Assert
         act

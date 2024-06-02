@@ -5,13 +5,22 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Strongly.Options.Tests.Utils;
 
-internal static class DynamicAssemblyLoader
+internal sealed class DynamicCode
 {
-    public static Assembly CreateFromCode(
-        string code,
-        string assemblyName)
+    private readonly string _code;
+
+    private DynamicCode(string code)
     {
-        var syntaxTree = CSharpSyntaxTree.ParseText(code);
+        _code = code;
+    }
+
+    public static implicit operator DynamicCode(string code) => new(code);
+
+    public Assembly EmitAssembly(string? assemblyName = null)
+    {
+        assemblyName ??= Guid.NewGuid().ToString();
+
+        var syntaxTree = CSharpSyntaxTree.ParseText(_code);
 
         var references = AppDomain.CurrentDomain
            .GetAssemblies()
