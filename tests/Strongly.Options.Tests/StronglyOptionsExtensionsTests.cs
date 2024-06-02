@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Strongly.Options.Tests.TestData;
 using Strongly.Options.Tests.Utils;
 
 namespace Strongly.Options.Tests;
@@ -204,9 +205,41 @@ public class StronglyOptionsExtensionsTests
            .NotBeNull();
     }
 
-    // Registers all options in assembly
+    [Fact]
+    public void Registers_all_options_in_T_assembly()
+    {
+        // Arrange
+        JsonConfiguration configuration =
+            """
+            {
+              "App": {
+                "ApplicationCode": "Strongly.Options"
+              },
+              "EnableExperimentalFeatures": true
+            }
+            """;
 
-    // Registers all options in T's assembly
+        // Act
+        var provider = new ServiceCollection()
+           .AddStronglyOptionsFromAssemblyContainingType<FeatureOptions>(configuration)
+           .BuildServiceProvider();
+
+        var appOptions = provider.GetRequiredService<IOptions<ApplicationOptions>>();
+        var featureOptions = provider.GetRequiredService<IOptions<FeatureOptions>>();
+
+        // Assert
+        appOptions
+           .Value
+           .ApplicationCode
+           .Should()
+           .Be("Strongly.Options");
+
+        featureOptions
+           .Value
+           .EnableExperimentalFeatures
+           .Should()
+           .BeTrue();
+    }
 
     // Maps property values
 
@@ -223,4 +256,6 @@ public class StronglyOptionsExtensionsTests
     // uses default value when not specified
 
     // no setter
+
+    // json property name
 }

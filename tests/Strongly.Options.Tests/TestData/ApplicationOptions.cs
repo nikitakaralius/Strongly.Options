@@ -1,6 +1,6 @@
 namespace Strongly.Options.Tests.TestData;
 
-[StronglyOptions(StronglyOptionsSection.Root)]
+[StronglyOptions("App")]
 public sealed record ApplicationOptions
 {
     public string ApplicationCode { get; init; } = default!;
