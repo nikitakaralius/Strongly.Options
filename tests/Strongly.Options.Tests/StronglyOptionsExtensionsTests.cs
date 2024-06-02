@@ -8,6 +8,64 @@ namespace Strongly.Options.Tests;
 public class StronglyOptionsExtensionsTests
 {
     [Fact]
+    public void Maps_options_values()
+    {
+        DynamicCode code =
+            """
+            using System;
+            using System.Collections.Generic;
+
+            using Strongly.Options;
+
+            [StronglyOptions("Auth")]
+            public class AuthOptions
+            {
+                public Uri AuthorityUrl { get; set; } = null!;
+            
+                public IReadOnlyList<string> Audiences { get; set; } = [];
+            }
+
+            """;
+
+        JsonConfiguration configuration =
+            """
+            {
+              "Auth": {
+                "AuthorityUrl": "https://auth-url.com",
+                "Audiences": [
+                  "hello",
+                  "world"
+                ]
+              }
+            }
+            """;
+
+        var assembly = code.EmitAssembly();
+
+        var authOptionsType = OptionsTypeFactory.MakeGenericType("AuthOptions", assembly);
+
+        // Act
+        var provider = new ServiceCollection()
+           .AddStronglyOptions(configuration, assembly)
+           .BuildServiceProvider();
+
+        var authOptions = (IOptions<object>) provider.GetRequiredService(authOptionsType);
+
+        // Assert
+        authOptions
+           .GetOptionsValue<Uri>("AuthorityUrl")
+           .Should()
+           .Be(new Uri("https://auth-url.com"));
+
+        authOptions
+           .GetOptionsValue<IReadOnlyList<string>>("Audiences")
+           .Should()
+           .ContainInOrder(["hello", "world"])
+           .And
+           .HaveCount(2);
+    }
+
+    [Fact]
     public void Should_throw_when_section_not_found()
     {
         // Arrange
@@ -278,6 +336,4 @@ public class StronglyOptionsExtensionsTests
     }
 
     // handles multiple top level options
-
-    // maps values
 }
