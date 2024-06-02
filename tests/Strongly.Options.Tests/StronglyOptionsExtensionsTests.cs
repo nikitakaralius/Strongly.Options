@@ -1,8 +1,54 @@
+using Microsoft.Extensions.DependencyInjection;
+using Strongly.Options.Tests.Utils;
+
 namespace Strongly.Options.Tests;
 
 public class StronglyOptionsExtensionsTests
 {
-    // Throws when section not found
+    [Fact]
+    public void Should_throw_when_section_not_found()
+    {
+        // Arrange
+        const string code =
+            """
+            using Strongly.Options;
+
+            [StronglyOptions("NoSectionLikeThat")]
+            public sealed record FeatureOptions
+            {
+                public bool EnableExperimentalFeatures { get; } = false;
+            }
+
+            """;
+
+        const string jsonSettings =
+            """
+            {
+              "Auth": {
+                "AuthorityUrl": "https://auth-url.com",
+                "Audiences": [
+                  "hello",
+                  "world"
+                ]
+              }
+            }
+            """;
+
+        var assembly = DynamicAssemblyLoader.CreateFromCode(
+            code,
+            "Should_throw_when_section_not_found");
+
+        var configuration = ConfigurationFactory.CreateFromJson(jsonSettings);
+
+        // Act
+        var act = () => new ServiceCollection()
+           .AddStronglyOptions(configuration, assembly);
+
+        // Assert
+        act
+           .Should()
+           .Throw<SectionNotFoundException>();
+    }
 
     // Registers all options in assembly
 
