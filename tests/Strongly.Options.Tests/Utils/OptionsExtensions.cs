@@ -2,14 +2,12 @@ using Microsoft.Extensions.Options;
 
 namespace Strongly.Options.Tests.Utils;
 
-internal static class FluentAssertionsExtensions
+internal static class OptionsExtensions
 {
     public static object GetOptionsPropertyValue(
         this IOptions<object> options,
-        string propertyName)
-    {
-        return options.GetOptionsPropertyValue<object>(propertyName);
-    }
+        string propertyName) =>
+        options.GetOptionsPropertyValue<object>(propertyName);
 
     public static T GetOptionsPropertyValue<T>(
         this IOptions<object> options,

@@ -264,7 +264,7 @@ public class StronglyOptionsExtensionsTests
     }
 
     [Fact]
-    public void Registers_all_options_in_T_assembly()
+    public void Registers_all_options_of_T_assembly()
     {
         // Arrange
         JsonConfiguration configuration =
