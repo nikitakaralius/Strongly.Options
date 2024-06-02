@@ -4,14 +4,14 @@ namespace Strongly.Options.Tests.Utils;
 
 internal static class FluentAssertionsExtensions
 {
-    public static object GetOptionsValue(
+    public static object GetOptionsPropertyValue(
         this IOptions<object> options,
         string propertyName)
     {
-        return options.GetOptionsValue<object>(propertyName);
+        return options.GetOptionsPropertyValue<object>(propertyName);
     }
 
-    public static T GetOptionsValue<T>(
+    public static T GetOptionsPropertyValue<T>(
         this IOptions<object> options,
         string propertyName)
     {

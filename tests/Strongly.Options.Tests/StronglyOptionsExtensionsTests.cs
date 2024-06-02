@@ -53,12 +53,12 @@ public class StronglyOptionsExtensionsTests
 
         // Assert
         authOptions
-           .GetOptionsValue<Uri>("AuthorityUrl")
+           .GetOptionsPropertyValue<Uri>("AuthorityUrl")
            .Should()
            .Be(new Uri("https://auth-url.com"));
 
         authOptions
-           .GetOptionsValue<IReadOnlyList<string>>("Audiences")
+           .GetOptionsPropertyValue<IReadOnlyList<string>>("Audiences")
            .Should()
            .ContainInOrder(["hello", "world"])
            .And
@@ -168,12 +168,12 @@ public class StronglyOptionsExtensionsTests
 
         // Assert
         authOptions
-           .GetOptionsValue("AuthorityUrl")
+           .GetOptionsPropertyValue("AuthorityUrl")
            .Should()
            .NotBeNull();
 
         serviceOptions
-           .GetOptionsValue("Url")
+           .GetOptionsPropertyValue("Url")
            .Should()
            .NotBeNull();
     }
@@ -253,12 +253,12 @@ public class StronglyOptionsExtensionsTests
 
         // Assert
         authOptions
-           .GetOptionsValue("AuthorityUrl")
+           .GetOptionsPropertyValue("AuthorityUrl")
            .Should()
            .NotBeNull();
 
         serviceOptions
-           .GetOptionsValue("Url")
+           .GetOptionsPropertyValue("Url")
            .Should()
            .NotBeNull();
     }
@@ -335,5 +335,58 @@ public class StronglyOptionsExtensionsTests
            .BeTrue();
     }
 
-    // handles multiple top level options
+    [Fact]
+    public void Maps_multiple_top_level_options()
+    {
+        // Arrange
+        DynamicCode code =
+            """
+            using Strongly.Options;
+            
+            [StronglyOptions(StronglyOptionsSection.Root)]
+            public sealed record ApplicationOptions
+            {
+                public string Alias { get; init; } = default!;
+            }
+
+            [StronglyOptions(StronglyOptionsSection.Root)]
+            public sealed record FeatureOptions
+            {
+                public bool EnableExperimentalFeatures { get; init; } = false;
+            }
+
+            """;
+
+        JsonConfiguration configuration =
+            """
+            {
+              "Alias": "Strongly.Options",
+              "EnableExperimentalFeatures": true
+            }
+            """;
+
+        var assembly = code.EmitAssembly();
+
+        var appOptionsType = OptionsTypeFactory.MakeGenericType("ApplicationOptions", assembly);
+        var featureOptionsType = OptionsTypeFactory.MakeGenericType("FeatureOptions", assembly);
+
+        // Act
+        var provider = new ServiceCollection()
+           .AddStronglyOptions(configuration, assembly)
+           .BuildServiceProvider();
+
+        var authOptions = (IOptions<object>) provider.GetRequiredService(appOptionsType);
+        var serviceOptions = (IOptions<object>) provider.GetRequiredService(featureOptionsType);
+
+        // Assert
+        authOptions
+           .GetOptionsPropertyValue<string>("Alias")
+           .Should()
+           .Be("Strongly.Options");
+
+        serviceOptions
+           .GetOptionsPropertyValue<bool>("EnableExperimentalFeatures")
+           .Should()
+           .BeTrue();
+    }
 }
