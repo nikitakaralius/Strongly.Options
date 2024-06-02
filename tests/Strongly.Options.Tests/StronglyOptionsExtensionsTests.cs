@@ -241,21 +241,43 @@ public class StronglyOptionsExtensionsTests
            .BeTrue();
     }
 
-    // Maps property values
+    [Fact]
+    public void When_assembly_is_null_should_use_calling_assembly()
+    {
+        // Arrange
+        JsonConfiguration configuration =
+            """
+            {
+              "App": {
+                "app.alias": "Strongly.Options"
+              },
+              "EnableExperimentalFeatures": true
+            }
+            """;
 
-    // when null should use calling assembly
+        // Act
+        var provider = new ServiceCollection()
+           .AddStronglyOptions(configuration)
+           .BuildServiceProvider();
 
-    // works with root options
+        var appOptions = provider.GetRequiredService<IOptions<ApplicationOptions>>();
+        var featureOptions = provider.GetRequiredService<IOptions<FeatureOptions>>();
 
-    // nested section with underscores or :
+        // Assert
+        appOptions
+           .Value
+           .Alias
+           .Should()
+           .Be("Strongly.Options");
 
-    // namings with dot
+        featureOptions
+           .Value
+           .EnableExperimentalFeatures
+           .Should()
+           .BeTrue();
+    }
 
     // handles multiple top level options
 
-    // uses default value when not specified
-
-    // no setter
-
-    // json property name
+    // maps values
 }
