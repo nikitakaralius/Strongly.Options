@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Strongly.Options.Tests.Utils;
 
 namespace Strongly.Options.Tests;
@@ -99,9 +100,34 @@ public class StronglyOptionsExtensionsTests
         var serviceOptionsType = OptionsTypeFactory.MakeGenericType("ServiceOptions", assembly);
 
         // Act
-
         var provider = new ServiceCollection()
            .AddStronglyOptions(configuration, assembly)
+           .BuildServiceProvider();
+
+        var authOptions = (IOptions<object>) provider.GetRequiredService(authOptionsType);
+        var serviceOptions = (IOptions<object>) provider.GetRequiredService(serviceOptionsType);
+
+        // Assert
+        authOptions
+           .GetOptionsValue("AuthorityUrl")
+           .Should()
+           .NotBeNull();
+
+        serviceOptions
+           .GetOptionsValue("Url")
+           .Should()
+           .NotBeNull();
+    }
+
+    [Fact]
+    public void Registers_all_options_in_multiple_assemblies()
+    {
+        // Arrange
+
+        // Act
+        var provider = new ServiceCollection()
+           .AddStronglyOptions(configuration, authOptionsAssembly)
+           .AddStronglyOptions(configuration, serviceOptionsAssembly)
            .BuildServiceProvider();
 
         var getAuthOptions = () => provider.GetRequiredService(authOptionsType);
@@ -115,16 +141,6 @@ public class StronglyOptionsExtensionsTests
         getServiceOptions
            .Should()
            .NotThrow();
-    }
-
-    [Fact]
-    public void Registers_all_options_in_multiple_assemblies()
-    {
-        // Arrange
-
-        // Act
-
-        // Assert
     }
 
     // Registers all options in assembly
