@@ -213,7 +213,7 @@ public class StronglyOptionsExtensionsTests
             """
             {
               "App": {
-                "ApplicationCode": "Strongly.Options"
+                "app.alias": "Strongly.Options"
               },
               "EnableExperimentalFeatures": true
             }
@@ -230,7 +230,7 @@ public class StronglyOptionsExtensionsTests
         // Assert
         appOptions
            .Value
-           .ApplicationCode
+           .Alias
            .Should()
            .Be("Strongly.Options");
 
