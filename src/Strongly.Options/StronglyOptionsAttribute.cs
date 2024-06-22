@@ -1,6 +1,6 @@
 namespace Strongly.Options;
 
-[AttributeUsage(AttributeTargets.Class)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 public sealed class StronglyOptionsAttribute : Attribute
 {
     public StronglyOptionsAttribute(string section)
