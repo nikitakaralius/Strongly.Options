@@ -25,6 +25,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.SourceGene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.SourceGenerators.IntegrationTests", "tests\Strongly.Options.SourceGenerators.IntegrationTests\Strongly.Options.SourceGenerators.IntegrationTests.csproj", "{D0755D35-1C53-445B-8407-9F0BDCCE3DA3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{92934942-9914-4CD5-A11F-2025070385D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.TestsData.First", "tests\data\Strongly.Options.TestsData.First\Strongly.Options.TestsData.First.csproj", "{C783E27D-0F9E-4125-99E8-415B56B17225}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.TestsData.Second", "tests\data\Strongly.Options.TestsData.Second\Strongly.Options.TestsData.Second.csproj", "{F60A4C14-94E9-4A73-A574-D348E8E8FD1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.TestsData.CausingSectionNotFound", "tests\data\Strongly.Options.TestsData.CausingSectionNotFound\Strongly.Options.TestsData.CausingSectionNotFound.csproj", "{45CEF4E6-4BA3-47C4-91AE-36408EDD32F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +47,10 @@ Global
 		{7A61F3E8-80E5-4C3C-8DE9-5FABE8236083} = {DE58DB8D-15A8-44EC-8C80-E76CD1FBEB8D}
 		{A3A1D81B-BF77-49B9-9C58-2D7A4763BFAB} = {FC078CCE-79BD-4082-B4D2-CF86D81CFEFB}
 		{D0755D35-1C53-445B-8407-9F0BDCCE3DA3} = {FC078CCE-79BD-4082-B4D2-CF86D81CFEFB}
+		{92934942-9914-4CD5-A11F-2025070385D2} = {FC078CCE-79BD-4082-B4D2-CF86D81CFEFB}
+		{C783E27D-0F9E-4125-99E8-415B56B17225} = {92934942-9914-4CD5-A11F-2025070385D2}
+		{F60A4C14-94E9-4A73-A574-D348E8E8FD1D} = {92934942-9914-4CD5-A11F-2025070385D2}
+		{45CEF4E6-4BA3-47C4-91AE-36408EDD32F2} = {92934942-9914-4CD5-A11F-2025070385D2}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DC4A0273-920E-4685-A1D3-80767F912B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -61,5 +73,17 @@ Global
 		{D0755D35-1C53-445B-8407-9F0BDCCE3DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0755D35-1C53-445B-8407-9F0BDCCE3DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0755D35-1C53-445B-8407-9F0BDCCE3DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C783E27D-0F9E-4125-99E8-415B56B17225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C783E27D-0F9E-4125-99E8-415B56B17225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C783E27D-0F9E-4125-99E8-415B56B17225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C783E27D-0F9E-4125-99E8-415B56B17225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F60A4C14-94E9-4A73-A574-D348E8E8FD1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F60A4C14-94E9-4A73-A574-D348E8E8FD1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F60A4C14-94E9-4A73-A574-D348E8E8FD1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F60A4C14-94E9-4A73-A574-D348E8E8FD1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45CEF4E6-4BA3-47C4-91AE-36408EDD32F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45CEF4E6-4BA3-47C4-91AE-36408EDD32F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45CEF4E6-4BA3-47C4-91AE-36408EDD32F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45CEF4E6-4BA3-47C4-91AE-36408EDD32F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
