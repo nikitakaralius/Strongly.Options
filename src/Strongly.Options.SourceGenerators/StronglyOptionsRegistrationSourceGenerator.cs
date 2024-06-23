@@ -29,7 +29,7 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
 
     private const string GetRequiredSectionTemplate =
         """
-        configuration.GetRequiredSection("{Section}")
+        configuration.GetSection("{Section}") ?? throw new SectionNotFoundException($"Unable to find \"{Section}\" section in IConfiguration")
         """;
 
     private const string MethodTemplate =

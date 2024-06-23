@@ -19,8 +19,8 @@ namespace Strongly.Options
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<global::Company.Application.AuthOptions>(configuration.GetRequiredSection("Auth"));
-            services.Configure<global::ServiceOptions>(configuration.GetRequiredSection("Service"));
+            services.Configure<global::Company.Application.AuthOptions>(configuration.GetSection("Auth") ?? throw new SectionNotFoundException($"Unable to find \"Auth\" section in IConfiguration"));
+            services.Configure<global::ServiceOptions>(configuration.GetSection("Service") ?? throw new SectionNotFoundException($"Unable to find \"Service\" section in IConfiguration"));
     
             return services;
         }
