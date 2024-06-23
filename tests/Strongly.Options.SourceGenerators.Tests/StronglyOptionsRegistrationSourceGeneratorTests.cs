@@ -85,10 +85,25 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
     public async Task Registers_root_options()
     {
         // Arrange
+        var generator = new StronglyOptionsRegistrationSourceGenerator();
+        var driver = CSharpGeneratorDriver.Create(generator);
+
+        var compilation = CSharpCompilation.Create(
+            nameof(StronglyOptionsRegistrationSourceGenerator),
+            [
+                CSharpSyntaxTree.ParseText(RootOptionsText)
+            ],
+            [
+                MetadataReference.CreateFromFile(typeof(StronglyOptionsAttribute).Assembly.Location),
+                ..Basic.Reference.Assemblies.Net80.References.All
+            ],
+            new(OutputKind.DynamicallyLinkedLibrary));
 
         // Act
+        var result = driver.RunGenerators(compilation);
 
         // Assert
+        await Verify(result).UseDirectory("Snapshots");
     }
 
     [Fact]

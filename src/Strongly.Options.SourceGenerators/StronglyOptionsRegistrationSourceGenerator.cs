@@ -18,9 +18,18 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
 
     private const string StronglyOptionsAttribute = $"{StronglyOptionsNamespace}.StronglyOptionsAttribute";
 
+    private const string RootSection = "";
+
+    private const string ConfigurationParameterName = "configuration";
+
     private const string ConfigureTemplate =
         """
-                    services.Configure<{Type}>(configuration.GetRequiredSection("{Section}"));
+                    services.Configure<{Type}>({GetSection});
+        """;
+
+    private const string GetRequiredSectionTemplate =
+        """
+        configuration.GetRequiredSection("{Section}")
         """;
 
     private const string MethodTemplate =
@@ -43,7 +52,7 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
                 /// </example>
                 public static IServiceCollection AddStronglyOptions(
                     this IServiceCollection services,
-                    IConfiguration configuration)
+                    IConfiguration {{ConfigurationParameterName}})
                 {
         {Configure}
             
@@ -99,7 +108,7 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
         var configureMethods = options
            .Select(x => ConfigureTemplate
                .Replace("{Type}", x.FullyQualifiedTypeName)
-               .Replace("{Section}", x.Section));
+               .Replace("{GetSection}", CreateGetSectionFromTemplate(x.Section)));
 
         var mergedConfigureMethods = string.Join("\n", configureMethods);
 
@@ -108,5 +117,12 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
         context.AddSource(
             "StronglyOptionsServiceCollectionExtensions.g.cs",
             SourceText.From(addStronglyOptionsExtensionMethod, Encoding.UTF8));
+    }
+
+    private string CreateGetSectionFromTemplate(string section)
+    {
+        return section == RootSection
+            ? ConfigurationParameterName
+            : GetRequiredSectionTemplate.Replace("{Section}", section);
     }
 }
