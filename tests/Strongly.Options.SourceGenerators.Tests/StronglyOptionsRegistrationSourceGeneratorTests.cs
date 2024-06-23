@@ -105,10 +105,4 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
         // Assert
         await Verify(result).UseDirectory("Snapshots");
     }
-
-    [Fact]
-    public async Task Warns_that_section_was_not_found()
-    {
-        // TODO: ...
-    }
 }
