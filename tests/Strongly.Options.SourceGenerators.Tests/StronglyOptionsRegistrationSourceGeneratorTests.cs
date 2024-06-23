@@ -1,5 +1,6 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Strongly.Options.SourceGenerators.Tests.Tools;
 
 namespace Strongly.Options.SourceGenerators.Tests;
 
@@ -62,17 +63,12 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
         var generator = new StronglyOptionsRegistrationSourceGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
 
-        var compilation = CSharpCompilation.Create(
-            nameof(StronglyOptionsRegistrationSourceGenerator),
+        var compilation = DefaultCompilation.Create(
+            nameof(Registers_all_options_in_compilation),
             [
-               CSharpSyntaxTree.ParseText(AuthOptionsClassText),
-               CSharpSyntaxTree.ParseText(ServiceRecordOptionsRecordText)
-            ],
-            [
-                MetadataReference.CreateFromFile(typeof(StronglyOptionsAttribute).Assembly.Location),
-                ..Basic.Reference.Assemblies.Net80.References.All
-            ],
-            new(OutputKind.DynamicallyLinkedLibrary));
+                CSharpSyntaxTree.ParseText(AuthOptionsClassText),
+                CSharpSyntaxTree.ParseText(ServiceRecordOptionsRecordText)
+            ]);
 
         // Act
         var result = driver.RunGenerators(compilation);
@@ -88,16 +84,11 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
         var generator = new StronglyOptionsRegistrationSourceGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
 
-        var compilation = CSharpCompilation.Create(
-            nameof(StronglyOptionsRegistrationSourceGenerator),
+        var compilation = DefaultCompilation.Create(
+            nameof(Registers_root_options),
             [
                 CSharpSyntaxTree.ParseText(RootOptionsText)
-            ],
-            [
-                MetadataReference.CreateFromFile(typeof(StronglyOptionsAttribute).Assembly.Location),
-                ..Basic.Reference.Assemblies.Net80.References.All
-            ],
-            new(OutputKind.DynamicallyLinkedLibrary));
+            ]);
 
         // Act
         var result = driver.RunGenerators(compilation);
