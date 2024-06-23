@@ -19,18 +19,11 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
     private const string StronglyOptionsAttribute = $"{StronglyOptionsNamespace}.StronglyOptionsAttribute";
     private const string StronglyOptionsModuleAttribute = $"{StronglyOptionsNamespace}.StronglyOptionsModuleAttribute";
 
-    private const string RootSection = "";
-
     private const string ConfigurationParameterName = "configuration";
 
     private const string ConfigureTemplate =
         """
-                    services.Configure<{Type}>({GetSection});
-        """;
-
-    private const string GetRequiredSectionTemplate =
-        """
-        configuration.GetSection("{Section}") ?? throw new SectionNotFoundException($"Unable to find \"{Section}\" section in IConfiguration")
+                    services.Configure<{Type}>(GetConfigurationSection("{Section}", configuration));
         """;
 
     private const string MethodTemplate =
@@ -58,6 +51,21 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
         {Configure}
             
                     return services;
+                }
+                
+                
+                private static IConfiguration GetConfigurationSection(string sectionName, IConfiguration configuration)
+                {
+                    if (sectionName == StronglyOptionsSection.Root)
+                        return configuration;
+                
+                    var section = configuration.GetSection(sectionName);
+                
+                    if (!section.AsEnumerable().Any(x => x.Value is not null))
+                        throw new SectionNotFoundException(
+                            $"Unable to find {section} section in Configuration");
+                
+                    return section;
                 }
             }
         }
@@ -118,7 +126,7 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
            .Options
            .Select(x => ConfigureTemplate
                .Replace("{Type}", x.FullyQualifiedTypeName)
-               .Replace("{GetSection}", CreateGetSectionFromTemplate(x.Section)));
+               .Replace("{Section}", x.Section));
 
         var mergedConfigureMethods = string.Join("\n", configureMethods);
 
@@ -129,12 +137,5 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
         context.AddSource(
             "StronglyOptionsServiceCollectionExtensions.g.cs",
             SourceText.From(addStronglyOptionsExtensionMethod, Encoding.UTF8));
-    }
-
-    private string CreateGetSectionFromTemplate(string section)
-    {
-        return section == RootSection
-            ? ConfigurationParameterName
-            : GetRequiredSectionTemplate.Replace("{Section}", section);
     }
 }
