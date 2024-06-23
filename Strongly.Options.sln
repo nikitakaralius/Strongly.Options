@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{1E4EEDDF-247
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{703EA636-E9B3-4D1B-BF80-63A46201885E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{703EA636-E9B3-4D1B-BF80-63A46201885E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.Example", "examples\Strongly.Options.Example\Strongly.Options.Example.csproj", "{258EEE06-B3F3-492B-AFDB-319595CD15A7}"
 EndProject
