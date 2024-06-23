@@ -1,4 +1,3 @@
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Strongly.Options.SourceGenerators.Tests.Tools;
 
@@ -25,7 +24,7 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
 
         """;
 
-    private const string ServiceRecordOptionsRecordText =
+    private const string ServiceOptionsRecordText =
         """
         using System;
         using System.Collections.Generic;
@@ -67,14 +66,15 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
             nameof(Registers_all_options_in_compilation),
             [
                 CSharpSyntaxTree.ParseText(AuthOptionsClassText),
-                CSharpSyntaxTree.ParseText(ServiceRecordOptionsRecordText)
+                CSharpSyntaxTree.ParseText(ServiceOptionsRecordText)
             ]);
 
         // Act
         var result = driver.RunGenerators(compilation);
 
         // Assert
-        await Verify(result).UseDirectory("Snapshots");
+        await Verify(result)
+           .UseDirectory(TestConstants.SnapshotsDirectory);
     }
 
     [Fact]
@@ -94,6 +94,7 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
         var result = driver.RunGenerators(compilation);
 
         // Assert
-        await Verify(result).UseDirectory("Snapshots");
+        await Verify(result)
+           .UseDirectory(TestConstants.SnapshotsDirectory);
     }
 }
