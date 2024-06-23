@@ -184,6 +184,7 @@ public class StronglyOptionsServiceCollectionExtensionsTests
          // Act
          var provider = new ServiceCollection()
             .AddStronglyOptions(configuration)
+            .AddSomeAnotherProjectStronglyOptions(configuration)
             .BuildServiceProvider();
 
          var applicationOptions = provider
