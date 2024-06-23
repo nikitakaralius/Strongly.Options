@@ -1,4 +1,4 @@
-namespace Strongly.Options.SourceGenerators.IntegrationTests.TestData;
+namespace Strongly.Options.TestsData.Second;
 
 [StronglyOptions("Service")]
 public sealed record ServiceOptions

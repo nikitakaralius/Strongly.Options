@@ -28,11 +28,9 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Strongly.Options\Strongly.Options.csproj" />
-      <ProjectReference
-              Include="..\..\src\Strongly.Options.SourceGenerators\Strongly.Options.SourceGenerators.csproj"
-              OutputItemType="Analyzer"
-              ReferenceOutputAssembly="false"
-      />
+      <ProjectReference Include="..\data\Strongly.Options.TestsData.CausingSectionNotFound\Strongly.Options.TestsData.CausingSectionNotFound.csproj" />
+      <ProjectReference Include="..\data\Strongly.Options.TestsData.First\Strongly.Options.TestsData.First.csproj" />
+      <ProjectReference Include="..\data\Strongly.Options.TestsData.Second\Strongly.Options.TestsData.Second.csproj" />
     </ItemGroup>
 
 </Project>

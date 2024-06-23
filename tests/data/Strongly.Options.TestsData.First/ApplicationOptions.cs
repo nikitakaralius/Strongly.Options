@@ -1,4 +1,4 @@
-namespace Strongly.Options.SourceGenerators.IntegrationTests.TestData;
+namespace Strongly.Options.TestsData.First;
 
 [StronglyOptions(StronglyOptionsSection.Root)]
 public sealed record ApplicationOptions
