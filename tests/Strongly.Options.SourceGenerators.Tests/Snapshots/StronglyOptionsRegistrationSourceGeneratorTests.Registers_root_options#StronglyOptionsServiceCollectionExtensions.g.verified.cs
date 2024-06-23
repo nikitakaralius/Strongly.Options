@@ -19,9 +19,24 @@ namespace Strongly.Options
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<global::FeatureOptions>(configuration);
+            services.Configure<global::FeatureOptions>(GetConfigurationSection("", configuration));
     
             return services;
+        }
+        
+        
+        private static IConfiguration GetConfigurationSection(string sectionName, IConfiguration configuration)
+        {
+            if (sectionName == StronglyOptionsSection.Root)
+                return configuration;
+        
+            var section = configuration.GetSection(sectionName);
+        
+            if (!section.AsEnumerable().Any(x => x.Value is not null))
+                throw new SectionNotFoundException(
+                    $"Unable to find {section} section in Configuration");
+        
+            return section;
         }
     }
 }
