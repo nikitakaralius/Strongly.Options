@@ -6,7 +6,7 @@ using Strongly.Options.Example.Options;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
-builder.Services.AddStronglyOptions(configuration);
+builder.Services.AddSampleStronglyOptions(configuration);
 
 var app = builder.Build();
 

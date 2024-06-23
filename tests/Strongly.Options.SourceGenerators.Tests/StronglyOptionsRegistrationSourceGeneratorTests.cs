@@ -55,6 +55,14 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
 
         """;
 
+    private const string AssemblyInfoText =
+        """
+        using Strongly.Options;
+        
+        [assembly: StronglyOptionsModule("Tests")]
+        
+        """;
+
     [Fact]
     public async Task Registers_all_options_in_compilation()
     {
@@ -88,6 +96,28 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
             nameof(Registers_root_options),
             [
                 CSharpSyntaxTree.ParseText(RootOptionsText)
+            ]);
+
+        // Act
+        var result = driver.RunGenerators(compilation);
+
+        // Assert
+        await Verify(result)
+           .UseDirectory(TestConstants.SnapshotsDirectory);
+    }
+
+    [Fact]
+    public async Task Should_insert_module_in_extension_method_when_assembly_attribute_defined()
+    {
+        // Arrange
+        var generator = new StronglyOptionsRegistrationSourceGenerator();
+        var driver = CSharpGeneratorDriver.Create(generator);
+
+        var compilation = DefaultCompilation.Create(
+            nameof(Registers_all_options_in_compilation),
+            [
+                CSharpSyntaxTree.ParseText(AuthOptionsClassText),
+                CSharpSyntaxTree.ParseText(AssemblyInfoText)
             ]);
 
         // Act
