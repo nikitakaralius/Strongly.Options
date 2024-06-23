@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 
 using Strongly.Options;
-using Strongly.Options.Example.Options;
+using Strongly.Options.Sample.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;

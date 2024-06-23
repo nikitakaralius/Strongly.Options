@@ -1,4 +1,4 @@
-namespace Strongly.Options.Example.Options;
+namespace Strongly.Options.Sample.Options;
 
 // We strongly suggest to use immutable records
 [StronglyOptions("Service")]

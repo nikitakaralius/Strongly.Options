@@ -1,4 +1,4 @@
-namespace Strongly.Options.Example.Options;
+namespace Strongly.Options.Sample.Options;
 
 // However you can still use classes with getters and setters
 [StronglyOptions("Auth")]
