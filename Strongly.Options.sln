@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.SourceGene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.SourceGenerators.Tests", "tests\Strongly.Options.SourceGenerators.Tests\Strongly.Options.SourceGenerators.Tests.csproj", "{A3A1D81B-BF77-49B9-9C58-2D7A4763BFAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strongly.Options.SourceGenerators.IntegrationTests", "tests\Strongly.Options.SourceGenerators.IntegrationTests\Strongly.Options.SourceGenerators.IntegrationTests.csproj", "{D0755D35-1C53-445B-8407-9F0BDCCE3DA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,7 @@ Global
 		{258EEE06-B3F3-492B-AFDB-319595CD15A7} = {703EA636-E9B3-4D1B-BF80-63A46201885E}
 		{7A61F3E8-80E5-4C3C-8DE9-5FABE8236083} = {DE58DB8D-15A8-44EC-8C80-E76CD1FBEB8D}
 		{A3A1D81B-BF77-49B9-9C58-2D7A4763BFAB} = {FC078CCE-79BD-4082-B4D2-CF86D81CFEFB}
+		{D0755D35-1C53-445B-8407-9F0BDCCE3DA3} = {FC078CCE-79BD-4082-B4D2-CF86D81CFEFB}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DC4A0273-920E-4685-A1D3-80767F912B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -54,5 +57,9 @@ Global
 		{A3A1D81B-BF77-49B9-9C58-2D7A4763BFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3A1D81B-BF77-49B9-9C58-2D7A4763BFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3A1D81B-BF77-49B9-9C58-2D7A4763BFAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0755D35-1C53-445B-8407-9F0BDCCE3DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0755D35-1C53-445B-8407-9F0BDCCE3DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0755D35-1C53-445B-8407-9F0BDCCE3DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0755D35-1C53-445B-8407-9F0BDCCE3DA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
