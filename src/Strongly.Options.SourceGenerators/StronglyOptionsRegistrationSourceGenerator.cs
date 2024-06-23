@@ -17,6 +17,7 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
     private const string StronglyOptionsNamespace = "Strongly.Options";
 
     private const string StronglyOptionsAttribute = $"{StronglyOptionsNamespace}.StronglyOptionsAttribute";
+    private const string StronglyOptionsModuleAttribute = $"{StronglyOptionsNamespace}.StronglyOptionsModuleAttribute";
 
     private const string RootSection = "";
 
@@ -47,10 +48,10 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
                 /// <example>
                 /// <code>
                 /// var configuration = builder.Configuration;
-                /// builder.Services.AddStronglyOptions(configuration);
+                /// builder.Services.Add{ModuleName}StronglyOptions(configuration);
                 /// </code>
                 /// </example>
-                public static IServiceCollection AddStronglyOptions(
+                public static IServiceCollection Add{ModuleName}StronglyOptions(
                     this IServiceCollection services,
                     IConfiguration {{ConfigurationParameterName}})
                 {
@@ -75,8 +76,16 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
                 transform: GetOptionsMetadata)
            .Collect();
 
+        var moduleNameProvider = context
+           .CompilationProvider
+           .Select((x, _) => x
+               .Assembly
+               .GetAttributes()
+               .FirstOrDefault(a => a.AttributeClass!.ToDisplayString() == StronglyOptionsModuleAttribute))
+           .Select((x, _) => x?.ConstructorArguments.First().Value?.ToString() ?? "");
+
         context.RegisterSourceOutput(
-            optionsMetadataProvider,
+            optionsMetadataProvider.Combine(moduleNameProvider),
             GenerateCode);
     }
 
@@ -103,16 +112,19 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
 
     private void GenerateCode(
         SourceProductionContext context,
-        ImmutableArray<OptionsMetadata> options)
+        (ImmutableArray<OptionsMetadata> Options, string ModuleName) sourceGenData)
     {
-        var configureMethods = options
+        var configureMethods = sourceGenData
+           .Options
            .Select(x => ConfigureTemplate
                .Replace("{Type}", x.FullyQualifiedTypeName)
                .Replace("{GetSection}", CreateGetSectionFromTemplate(x.Section)));
 
         var mergedConfigureMethods = string.Join("\n", configureMethods);
 
-        var addStronglyOptionsExtensionMethod = MethodTemplate.Replace("{Configure}", mergedConfigureMethods);
+        var addStronglyOptionsExtensionMethod = MethodTemplate
+           .Replace("{ModuleName}", sourceGenData.ModuleName)
+           .Replace("{Configure}", mergedConfigureMethods);
 
         context.AddSource(
             "StronglyOptionsServiceCollectionExtensions.g.cs",
