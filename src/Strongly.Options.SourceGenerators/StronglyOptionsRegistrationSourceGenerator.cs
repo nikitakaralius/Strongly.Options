@@ -62,7 +62,6 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
                 StronglyOptionsAttribute,
                 predicate: (node, _) => node
                     is ClassDeclarationSyntax
-                    or StructDeclarationSyntax
                     or RecordDeclarationSyntax,
                 transform: GetOptionsMetadata)
            .Collect();

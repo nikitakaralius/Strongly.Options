@@ -1,8 +1,6 @@
 namespace Strongly.Options;
 
-[AttributeUsage(
-    AttributeTargets.Class | AttributeTargets.Struct,
-    Inherited = false)]
+[AttributeUsage(AttributeTargets.Class, Inherited = false)]
 public sealed class StronglyOptionsAttribute : Attribute
 {
     public StronglyOptionsAttribute(string section)

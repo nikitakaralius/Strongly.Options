@@ -5,7 +5,7 @@ namespace Strongly.Options.SourceGenerators.Tests;
 
 public class StronglyOptionsRegistrationSourceGeneratorTests
 {
-    private const string AuthOptionsRecordText =
+    private const string AuthOptionsClassText =
         """
         using System;
         using System.Collections.Generic;
@@ -24,7 +24,7 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
 
         """;
 
-    private const string ServiceOptionsRecordText =
+    private const string ServiceRecordOptionsRecordText =
         """
         using System;
         using System.Collections.Generic;
@@ -43,8 +43,20 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
 
         """;
 
+    private const string RootOptionsText =
+        """
+        using Strongly.Options;
+
+        [StronglyOptions(StronglyOptionsSection.Root)]
+        public sealed record FeatureOptions
+        {
+            public bool EnableExperimentalFeatures { get; } = false;
+        }
+
+        """;
+
     [Fact]
-    public async Task GeneratesAddStronglyOptionsMethod()
+    public async Task Registers_all_options_in_compilation()
     {
         // Arrange
         var generator = new StronglyOptionsRegistrationSourceGenerator();
@@ -53,8 +65,8 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
         var compilation = CSharpCompilation.Create(
             nameof(StronglyOptionsRegistrationSourceGenerator),
             [
-               CSharpSyntaxTree.ParseText(AuthOptionsRecordText),
-               CSharpSyntaxTree.ParseText(ServiceOptionsRecordText)
+               CSharpSyntaxTree.ParseText(AuthOptionsClassText),
+               CSharpSyntaxTree.ParseText(ServiceRecordOptionsRecordText)
             ],
             [
                 MetadataReference.CreateFromFile(typeof(StronglyOptionsAttribute).Assembly.Location),
@@ -63,10 +75,25 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
             new(OutputKind.DynamicallyLinkedLibrary));
 
         // Act
-        var result = driver
-           .RunGenerators(compilation);
+        var result = driver.RunGenerators(compilation);
 
         // Assert
         await Verify(result).UseDirectory("Snapshots");
+    }
+
+    [Fact]
+    public async Task Registers_root_options()
+    {
+        // Arrange
+
+        // Act
+
+        // Assert
+    }
+
+    [Fact]
+    public async Task Warns_that_section_was_not_found()
+    {
+        // TODO: ...
     }
 }
