@@ -27,7 +27,7 @@ public class StronglyOptionsServiceCollectionExtensionsTests
 
         // Act
         var provider = new ServiceCollection()
-           .AddStronglyOptions(configuration)
+           .AddFirstStronglyOptions(configuration)
            .BuildServiceProvider();
 
         var authOptions = provider
@@ -82,11 +82,7 @@ public class StronglyOptionsServiceCollectionExtensionsTests
         JsonConfiguration configuration =
             """
             {
-              "Service": {
-                "Url": "https://some-url-goes-here.com",
-                "Key": "e324a183-54df-4f24-9db8-66322d066214",
-                "RequestsPerHour": 5
-              },
+              "Alias": "Strongly.Options",
               "Auth": {
                 "AuthorityUrl": "https://auth-url.com",
                 "Audiences": [
@@ -99,27 +95,27 @@ public class StronglyOptionsServiceCollectionExtensionsTests
 
         // Act
         var provider = new ServiceCollection()
-           .AddStronglyOptions(configuration)
+           .AddFirstStronglyOptions(configuration)
            .BuildServiceProvider();
 
         var authOptions = provider
            .GetRequiredService<IOptions<AuthOptions>>()
            .Value;
 
-        var serviceOptions = provider
-           .GetRequiredService<IOptions<ServiceOptions>>()
+        var applicationOptions = provider
+           .GetRequiredService<IOptions<ApplicationOptions>>()
            .Value;
 
         // Assert
         authOptions
            .AuthorityUrl
            .Should()
-           .NotBeNull();
+           .Be("https://auth-url.com");
 
-        serviceOptions
-           .Url
+        applicationOptions
+           .Alias
            .Should()
-           .NotBeNull();
+           .Be("Strongly.Options");
     }
 
      [Fact]
@@ -145,7 +141,7 @@ public class StronglyOptionsServiceCollectionExtensionsTests
 
          // Act
          var provider = new ServiceCollection()
-            .AddStronglyOptions(configuration)
+            .AddFirstStronglyOptions(configuration)
             .AddSomeAnotherProjectStronglyOptions(configuration)
             .BuildServiceProvider();
 
@@ -177,13 +173,25 @@ public class StronglyOptionsServiceCollectionExtensionsTests
              """
              {
                "Alias": "Strongly.Options",
-               "EnableExperimentalFeatures": true
+               "EnableExperimentalFeatures": true,
+               "Auth": {
+                 "AuthorityUrl": "https://auth-url.com",
+                 "Audiences": [
+                   "hello",
+                   "world"
+                 ]
+               },
+               "Service": {
+                 "Url": "https://some-url-goes-here.com",
+                 "Key": "e324a183-54df-4f24-9db8-66322d066214",
+                 "RequestsPerHour": 5
+               },
              }
              """;
 
          // Act
          var provider = new ServiceCollection()
-            .AddStronglyOptions(configuration)
+            .AddFirstStronglyOptions(configuration)
             .AddSomeAnotherProjectStronglyOptions(configuration)
             .BuildServiceProvider();
 
