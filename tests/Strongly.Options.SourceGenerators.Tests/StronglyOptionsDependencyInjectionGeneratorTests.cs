@@ -72,7 +72,7 @@ public class StronglyOptionsDependencyInjectionGeneratorTests
         var driver = CSharpGeneratorDriver.Create(generator);
 
         var compilation = DefaultCompilation.Create(
-            nameof(Registers_all_options_in_compilation),
+            "DefaultAssembly",
             [
                 CSharpSyntaxTree.ParseText(AuthOptionsClassText),
                 CSharpSyntaxTree.ParseText(ServiceOptionsRecordText)
@@ -123,7 +123,7 @@ public class StronglyOptionsDependencyInjectionGeneratorTests
         var driver = CSharpGeneratorDriver.Create(generator);
 
         var compilation = DefaultCompilation.Create(
-            nameof(Registers_root_options),
+            "DefaultAssembly",
             [
                 CSharpSyntaxTree.ParseText(RootOptionsText)
             ]);
@@ -144,7 +144,7 @@ public class StronglyOptionsDependencyInjectionGeneratorTests
         var driver = CSharpGeneratorDriver.Create(generator);
 
         var compilation = DefaultCompilation.Create(
-            nameof(Registers_all_options_in_compilation),
+            "DefaultAssembly",
             [
                 CSharpSyntaxTree.ParseText(AuthOptionsClassText),
                 CSharpSyntaxTree.ParseText(AssemblyInfoText)
