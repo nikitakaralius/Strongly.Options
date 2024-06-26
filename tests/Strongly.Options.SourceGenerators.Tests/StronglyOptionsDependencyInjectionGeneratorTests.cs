@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Microsoft.CodeAnalysis.CSharp;
 using Strongly.Options.SourceGenerators.Tests.Tools;
 
@@ -83,6 +84,35 @@ public class StronglyOptionsDependencyInjectionGeneratorTests
         // Assert
         await Verify(result)
            .UseDirectory(TestConstants.SnapshotsDirectory);
+    }
+
+    [Theory]
+    [InlineData("Assembly.Part", "AddPartStronglyOptions")]
+    [InlineData("Assembly", "Assembly")]
+    public void Puts_assembly_name_in_extension_method_name_when_module_info_not_specified(
+        string assemblyName,
+        string expectedExtensionMethodName)
+    {
+        // Arrange
+        var generator = new StronglyOptionsDependencyInjectionGenerator();
+        var driver = CSharpGeneratorDriver.Create(generator);
+
+        var compilation = DefaultCompilation.Create(
+            assemblyName,
+            [
+                CSharpSyntaxTree.ParseText(AuthOptionsClassText)
+            ]);
+
+        // Act
+        var result = driver.RunGenerators(compilation).GetRunResult();
+
+
+        // Assert
+        result.Results.First()
+           .GeneratedSources.First()
+           .SourceText.ToString()
+           .Should()
+           .Contain(expectedExtensionMethodName);
     }
 
     [Fact]
