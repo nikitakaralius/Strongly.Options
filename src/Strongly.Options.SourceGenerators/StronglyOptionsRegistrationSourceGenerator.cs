@@ -6,6 +6,7 @@ using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using Strongly.Options.SourceGenerators.Extensions;
 
 namespace Strongly.Options.SourceGenerators;
 
@@ -28,14 +29,7 @@ public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
 
         var moduleNameProvider = context
            .CompilationProvider
-           .Select((x, _) => x
-               .Assembly
-               .GetAttributes()
-               .FirstOrDefault(a => a.AttributeClass!.ToDisplayString() == WellKnownNamings.StronglyOptionsModuleAttribute)?
-               .ConstructorArguments
-               .First()
-               .Value?
-               .ToString() ?? x.AssemblyName ?? "");
+           .Select((x, _) => x.Assembly.GetModuleNameFromAttributeOrShortAssemblyNameByDefault());
 
         context.RegisterSourceOutput(
             optionsMetadataProvider.Combine(moduleNameProvider),
