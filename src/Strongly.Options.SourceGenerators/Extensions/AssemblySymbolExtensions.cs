@@ -17,6 +17,17 @@ public static class AssemblySymbolExtensions
            .Value?
            .ToString();
 
-        return userSpecifiedModuleName ?? assembly.Name;
+        return userSpecifiedModuleName ?? assembly.GetLastAssemblyNamePart();
+    }
+
+    private static string GetLastAssemblyNamePart(this IAssemblySymbol assembly)
+    {
+        var assemblyName = assembly.Name;
+        var lastIndexOfDot = assemblyName.LastIndexOf('.');
+
+        if (lastIndexOfDot == -1)
+            return assemblyName;
+
+        return assemblyName.Substring(lastIndexOfDot + 1);
     }
 }
