@@ -3,7 +3,7 @@ using Strongly.Options.SourceGenerators.Tests.Tools;
 
 namespace Strongly.Options.SourceGenerators.Tests;
 
-public class StronglyOptionsRegistrationSourceGeneratorTests
+public class StronglyOptionsDependencyInjectionGeneratorTests
 {
     private const string AuthOptionsClassText =
         """
@@ -67,7 +67,7 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
     public async Task Registers_all_options_in_compilation()
     {
         // Arrange
-        var generator = new StronglyOptionsRegistrationSourceGenerator();
+        var generator = new StronglyOptionsDependencyInjectionGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
 
         var compilation = DefaultCompilation.Create(
@@ -89,7 +89,7 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
     public async Task Registers_root_options()
     {
         // Arrange
-        var generator = new StronglyOptionsRegistrationSourceGenerator();
+        var generator = new StronglyOptionsDependencyInjectionGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
 
         var compilation = DefaultCompilation.Create(
@@ -110,7 +110,7 @@ public class StronglyOptionsRegistrationSourceGeneratorTests
     public async Task Should_insert_module_in_extension_method_when_assembly_attribute_defined()
     {
         // Arrange
-        var generator = new StronglyOptionsRegistrationSourceGenerator();
+        var generator = new StronglyOptionsDependencyInjectionGenerator();
         var driver = CSharpGeneratorDriver.Create(generator);
 
         var compilation = DefaultCompilation.Create(

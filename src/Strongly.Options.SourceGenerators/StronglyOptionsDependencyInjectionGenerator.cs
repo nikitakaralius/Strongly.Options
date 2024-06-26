@@ -13,7 +13,7 @@ namespace Strongly.Options.SourceGenerators;
 using OptionsMetadata = (string FullyQualifiedTypeName, string Section);
 
 [Generator]
-public class StronglyOptionsRegistrationSourceGenerator : IIncrementalGenerator
+public class StronglyOptionsDependencyInjectionGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
