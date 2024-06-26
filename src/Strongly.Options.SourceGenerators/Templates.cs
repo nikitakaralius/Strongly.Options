@@ -32,18 +32,17 @@ public static class Templates
               
                       return services;
                   }
-                  
-                  
+
                   private static IConfiguration GetConfigurationSection(string sectionName, IConfiguration configuration)
                   {
                       if (sectionName == StronglyOptionsSection.Root)
                           return configuration;
-                  
+
                       var section = configuration.GetSection(sectionName);
-                  
+
                       if (!section.AsEnumerable().Any(x => x.Value is not null))
                           throw new SectionNotFoundException(
-                              $"Unable to find {section} section in Configuration");
+                              $"Unable to find \"{sectionName}\" section in Configuration");
                   
                       return section;
                   }
