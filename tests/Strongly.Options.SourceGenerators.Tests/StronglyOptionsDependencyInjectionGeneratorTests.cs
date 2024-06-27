@@ -137,7 +137,7 @@ public class StronglyOptionsDependencyInjectionGeneratorTests
     }
 
     [Fact]
-    public async Task Should_insert_module_in_extension_method_when_assembly_attribute_defined()
+    public async Task Should_insert_module_name_in_extension_method_when_assembly_attribute_defined()
     {
         // Arrange
         var generator = new StronglyOptionsDependencyInjectionGenerator();
