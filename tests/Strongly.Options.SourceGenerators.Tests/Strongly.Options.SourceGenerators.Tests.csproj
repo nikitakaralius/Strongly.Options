@@ -24,7 +24,9 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Strongly.Options\Strongly.Options.csproj" />
-        <ProjectReference Include="..\..\src\Strongly.Options.Abstractions\Strongly.Options.Abstractions.csproj" />
+        <ProjectReference Include="..\..\src\Strongly.Options.Abstractions\Strongly.Options.Abstractions.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="true" />
     </ItemGroup>
 
     <ItemGroup>
