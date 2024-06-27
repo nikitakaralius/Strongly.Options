@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <WarningsAsErrors>nullable</WarningsAsErrors>
+        <NoWarn>1573</NoWarn>
+        <RootNamespace>Strongly.Options</RootNamespace>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Strongly.Options.Abstractions</PackageId>
+        <Version>1.0.0</Version>
+        <OutputType>Library</OutputType>
+        <Authors>Nikita Karalius</Authors>
+        <AssemblyTitle>Strongly.Options.Abstractions</AssemblyTitle>
+        <Description>A library to utilize strongly-typed options with minimum effort.</Description>
+        <RepositoryUrl>https://github.com/nikitakaralius/Strongly.Options</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/nikitakaralius/Strongly.Options</PackageProjectUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="../../Readme.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
+
+</Project>

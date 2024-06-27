@@ -7,12 +7,17 @@ Strongly.Options is a library that helps you to create strongly-typed options in
 
 Register services
 ```csharp
+// Assembly: CoolApi
 var configuration = builder.Configuration;
-builder.Services.AddStronglyOptions(configuration);
+
+// AddCoolApiStronglyOptions will be created by a Source Generator
+builder.Services.AddCoolApiStronglyOptions(configuration);
 ```
 
 Define C# `class` or `record`
 ```csharp
+using Strongly.Options;
+
 [StronglyOptions("Service")]
 public sealed record ServiceOptions
 {
@@ -35,14 +40,20 @@ Add section inside configuration (e.g., `appsettings.json`)
 ```
 Get Options as a dependency
 ```csharp
+using Strongly.Options;
+
 public sealed class Showcase 
 {
     public Showcase(
         IOptions<ServiceOptions> options,
         IOptionsSnapshot<ServiceOptions> snapshot, // or
-        IOptionsMonitor<ServiceOptions> monitor) // or
+        IOptionsMonitor<ServiceOptions> monitor)   // or
     {
         ...    
     }
 }
 ```
+
+## Sample Projects
+
+To see this in practice you can examine [Sample Projects](samples)
