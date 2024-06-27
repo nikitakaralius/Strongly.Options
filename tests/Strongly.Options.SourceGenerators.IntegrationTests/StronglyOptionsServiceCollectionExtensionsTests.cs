@@ -12,6 +12,7 @@ public class StronglyOptionsServiceCollectionExtensionsTests
     [Fact]
     public void Maps_options_values()
     {
+        // Arrange
         JsonConfiguration configuration =
             """
             {
