@@ -1,7 +1,7 @@
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace Strongly.Options.SourceGenerators.Extensions;
+namespace Strongly.Options.Extensions;
 
 using static WellKnownNamings;
 

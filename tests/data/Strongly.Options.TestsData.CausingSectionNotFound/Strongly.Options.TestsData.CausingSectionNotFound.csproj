@@ -8,12 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference
-              Include="..\..\..\src\Strongly.Options.SourceGenerators\Strongly.Options.SourceGenerators.csproj"
+      <ProjectReference 
+              Include="..\..\..\src\Strongly.Options\Strongly.Options.csproj" 
               OutputItemType="Analyzer"
-              ReferenceOutputAssembly="false"
-      />
-      <ProjectReference Include="..\..\..\src\Strongly.Options\Strongly.Options.csproj" />
+              ReferenceOutputAssembly="false" />
+
+      <ProjectReference 
+              Include="..\..\..\src\Strongly.Options.Abstractions\Strongly.Options.Abstractions.csproj" 
+              OutputItemType="Analyzer"
+              ReferenceOutputAssembly="true" />
     </ItemGroup>
 
 </Project>

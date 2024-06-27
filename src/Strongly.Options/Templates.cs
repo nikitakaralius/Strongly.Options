@@ -1,4 +1,4 @@
-namespace Strongly.Options.SourceGenerators;
+namespace Strongly.Options;
 
 public static class Templates
 {

@@ -27,10 +27,21 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Strongly.Options\Strongly.Options.csproj" />
       <ProjectReference Include="..\data\Strongly.Options.TestsData.CausingSectionNotFound\Strongly.Options.TestsData.CausingSectionNotFound.csproj" />
       <ProjectReference Include="..\data\Strongly.Options.TestsData.First\Strongly.Options.TestsData.First.csproj" />
       <ProjectReference Include="..\data\Strongly.Options.TestsData.Second\Strongly.Options.TestsData.Second.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <ProjectReference
+                Include="..\..\src\Strongly.Options\Strongly.Options.csproj" 
+                OutputItemType="Analyzer"
+                ReferenceOutputAssembly="false" />
+
+        <ProjectReference
+                Include="..\..\src\Strongly.Options.Abstractions\Strongly.Options.Abstractions.csproj"
+                OutputItemType="Analyzer"
+                ReferenceOutputAssembly="true" />
     </ItemGroup>
 
 </Project>

@@ -83,7 +83,7 @@ public class StronglyOptionsServiceCollectionExtensionsTests
         JsonConfiguration configuration =
             """
             {
-              "Alias": "Strongly.Options",
+              "Alias": "Strongly.Options.Abstractions",
               "Auth": {
                 "AuthorityUrl": "https://auth-url.com",
                 "Audiences": [
@@ -116,7 +116,7 @@ public class StronglyOptionsServiceCollectionExtensionsTests
         applicationOptions
            .Alias
            .Should()
-           .Be("Strongly.Options");
+           .Be("Strongly.Options.Abstractions");
     }
 
      [Fact]
@@ -173,7 +173,7 @@ public class StronglyOptionsServiceCollectionExtensionsTests
          JsonConfiguration configuration =
              """
              {
-               "Alias": "Strongly.Options",
+               "Alias": "Strongly.Options.Abstractions",
                "EnableExperimentalFeatures": true,
                "Auth": {
                  "AuthorityUrl": "https://auth-url.com",
@@ -208,7 +208,7 @@ public class StronglyOptionsServiceCollectionExtensionsTests
          applicationOptions
             .Alias
             .Should()
-            .Be("Strongly.Options");
+            .Be("Strongly.Options.Abstractions");
 
          featureOptions
             .EnableExperimentalFeatures

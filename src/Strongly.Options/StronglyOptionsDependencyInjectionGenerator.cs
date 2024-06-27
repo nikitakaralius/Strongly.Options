@@ -6,9 +6,9 @@ using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using Strongly.Options.SourceGenerators.Extensions;
+using Strongly.Options.Extensions;
 
-namespace Strongly.Options.SourceGenerators;
+namespace Strongly.Options;
 
 using OptionsMetadata = (string FullyQualifiedTypeName, string Section);
 

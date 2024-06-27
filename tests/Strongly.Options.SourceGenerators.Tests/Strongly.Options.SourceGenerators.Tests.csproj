@@ -23,8 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Strongly.Options.SourceGenerators\Strongly.Options.SourceGenerators.csproj"/>
         <ProjectReference Include="..\..\src\Strongly.Options\Strongly.Options.csproj" />
+        <ProjectReference Include="..\..\src\Strongly.Options.Abstractions\Strongly.Options.Abstractions.csproj" />
     </ItemGroup>
 
     <ItemGroup>

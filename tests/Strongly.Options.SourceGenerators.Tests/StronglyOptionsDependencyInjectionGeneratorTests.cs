@@ -11,7 +11,7 @@ public class StronglyOptionsDependencyInjectionGeneratorTests
         using System;
         using System.Collections.Generic;
 
-        using Strongly.Options;
+        using Strongly.Options.Abstractions;
         
         namespace Company.Application;
 
@@ -30,7 +30,7 @@ public class StronglyOptionsDependencyInjectionGeneratorTests
         using System;
         using System.Collections.Generic;
 
-        using Strongly.Options;
+        using Strongly.Options.Abstractions;
 
         [StronglyOptions("Service")]
         public sealed record ServiceOptions
@@ -46,7 +46,7 @@ public class StronglyOptionsDependencyInjectionGeneratorTests
 
     private const string RootOptionsText =
         """
-        using Strongly.Options;
+        using Strongly.Options.Abstractions;
 
         [StronglyOptions(StronglyOptionsSection.Root)]
         public sealed record FeatureOptions
@@ -58,7 +58,7 @@ public class StronglyOptionsDependencyInjectionGeneratorTests
 
     private const string AssemblyInfoText =
         """
-        using Strongly.Options;
+        using Strongly.Options.Abstractions;
         
         [assembly: StronglyOptionsModule("Tests")]
         
