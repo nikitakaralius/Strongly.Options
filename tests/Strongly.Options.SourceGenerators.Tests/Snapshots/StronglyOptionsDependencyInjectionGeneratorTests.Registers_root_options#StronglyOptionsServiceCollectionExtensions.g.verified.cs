@@ -21,7 +21,7 @@ namespace Strongly.Options
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<global::FeatureOptions>(GetConfigurationSection("", configuration));
+
     
             return services;
         }

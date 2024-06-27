@@ -18,6 +18,8 @@
         <Description>A library to utilize strongly-typed options with minimum effort.</Description>
         <RepositoryUrl>https://github.com/nikitakaralius/Strongly.Options</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>Readme.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,6 +29,10 @@
         </PackageReference>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.0"/>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="../../Readme.md" Pack="true" PackagePath="/" />
     </ItemGroup>
 
     <!-- Reference the attributes from the generator to compile against them -->

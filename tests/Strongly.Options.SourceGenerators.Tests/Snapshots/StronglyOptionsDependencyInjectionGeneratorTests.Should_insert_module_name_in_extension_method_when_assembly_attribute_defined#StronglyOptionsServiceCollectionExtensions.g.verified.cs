@@ -17,11 +17,11 @@ namespace Strongly.Options
         /// builder.Services.Add{ModuleName}StronglyOptions(configuration);
         /// </code>
         /// </example>
-        public static IServiceCollection AddTestsStronglyOptions(
+        public static IServiceCollection AddDefaultAssemblyStronglyOptions(
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<global::Company.Application.AuthOptions>(GetConfigurationSection("Auth", configuration));
+
     
             return services;
         }
