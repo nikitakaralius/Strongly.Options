@@ -21,7 +21,8 @@ namespace Strongly.Options
             this IServiceCollection services,
             IConfiguration configuration)
         {
-
+            services.Configure<global::Company.Application.AuthOptions>(GetConfigurationSection("Auth", configuration));
+            services.Configure<global::ServiceOptions>(GetConfigurationSection("Service", configuration));
     
             return services;
         }
